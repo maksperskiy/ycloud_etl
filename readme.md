@@ -70,6 +70,7 @@ yc iam create-token
 
 This token is needed to call enpoints. Token expires in a year. 
 
+4. Create Service account that will invoke functions.
 
 ### Installation
 
@@ -102,7 +103,9 @@ These Environment Variables you should to add in "Environment Variables" in the 
 
 <img src="docs/images/envs.png" alt="env files screenshot" />
 
-3. Create version
+3. Select Service account.
+
+4. Create version.
 
 > There is **Link to invoke** for each Cloud Function. It's a endpoint to call. But it doesn't work without Bearer Token provided Yandex Cloud CLI.
 
