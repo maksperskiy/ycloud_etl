@@ -1,4 +1,3 @@
-import os
 import psycopg2
 from .core import DB_NAME, DB_USER, DB_PORT, DB_HOST, DB_PASSWORD
 

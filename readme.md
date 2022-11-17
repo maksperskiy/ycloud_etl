@@ -57,7 +57,7 @@ There are three Cloud Functions were creted to solve this task:
 2. To upload source code in the **Cloud Function** you need to make zip file with source code starting **bash** script: 
 
 ```bash
- sh make_zip.sh
+ make zip
 ```
 
  And upload zip file to the created **Bucket**.
@@ -79,9 +79,9 @@ This token is needed to call enpoints. Token expires in a year.
 <img src="docs/images/create_func.png" alt="env files screenshot" />
 
 In the Editor select "Object storage" **Method**, specify **Bucket** and zip file name as **Object**. As **Entrypoint** set:
- - initialize_database.initialize_database for Initialize database Function
- - import_currencies.import_currencies for Import currencies Function
- - get_currencies.get_currencies for Get currencies Function
+ - main.invoke_initialize_database for Initialize database Function
+ - main.invoke_import_currencies for Import currencies Function
+ - main.invoke_get_currencies for Get currencies Function
 
 For Initialize database Function create **Trigger** and set Timer setting "Cron expession" as **"0 9 ? * * *"**.
 
