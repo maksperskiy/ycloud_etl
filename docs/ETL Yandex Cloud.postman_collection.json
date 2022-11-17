@@ -1,0 +1,118 @@
+{
+	"info": {
+		"_postman_id": "009e3cd8-8b11-49e0-a0fe-b70c39a75946",
+		"name": "ETL Yandex Cloud",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20679628"
+	},
+	"item": [
+		{
+			"name": "get currency",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "t1.9euelZqRyMeXiZGTi5qXkImMlpHKmO3rnpWam8ydlMaOx8jNzJvJnJjJipXl8_c5EShk-e8xHhFu_N3z93k_JWT57zEeEW78.c6nb1kfoHwzn7dBXf_0-vPz-4_QksO3JH7vbJsUtQ9-VEn6bei4hbeJeMpgt2qToNoUAZ068fcFRUB-MB-stAw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://functions.yandexcloud.net/d4e6em2do1hk3s5ddofb?date_req=22/10/2022",
+					"protocol": "https",
+					"host": [
+						"functions",
+						"yandexcloud",
+						"net"
+					],
+					"path": [
+						"d4e6em2do1hk3s5ddofb"
+					],
+					"query": [
+						{
+							"key": "date_req",
+							"value": "22/10/2022"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "import currency",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "t1.9euelZqRyMeXiZGTi5qXkImMlpHKmO3rnpWam8ydlMaOx8jNzJvJnJjJipXl8_c5EShk-e8xHhFu_N3z93k_JWT57zEeEW78.c6nb1kfoHwzn7dBXf_0-vPz-4_QksO3JH7vbJsUtQ9-VEn6bei4hbeJeMpgt2qToNoUAZ068fcFRUB-MB-stAw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://functions.yandexcloud.net/d4e6585hmtldmu2v7r6o?date_req=22/10/2022",
+					"protocol": "https",
+					"host": [
+						"functions",
+						"yandexcloud",
+						"net"
+					],
+					"path": [
+						"d4e6585hmtldmu2v7r6o"
+					],
+					"query": [
+						{
+							"key": "date_req",
+							"value": "22/10/2022"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "initialize database",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "t1.9euelZqRyMeXiZGTi5qXkImMlpHKmO3rnpWam8ydlMaOx8jNzJvJnJjJipXl8_c5EShk-e8xHhFu_N3z93k_JWT57zEeEW78.c6nb1kfoHwzn7dBXf_0-vPz-4_QksO3JH7vbJsUtQ9-VEn6bei4hbeJeMpgt2qToNoUAZ068fcFRUB-MB-stAw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://functions.yandexcloud.net/d4ecflc2j0ecgenf15gb",
+					"protocol": "https",
+					"host": [
+						"functions",
+						"yandexcloud",
+						"net"
+					],
+					"path": [
+						"d4ecflc2j0ecgenf15gb"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
