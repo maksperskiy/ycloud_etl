@@ -1,7 +1,7 @@
 import os
 
 
-CBR_URL = "https://www.cbr.ru/scripts/XML_daily.asp?date_req"
+CBR_URL = "https://www.cbr.ru/scripts/XML_daily.asp"
 CURRENCIES = ["RUB", "USD", "EUR"]
 DB_HOST = os.getenv("DB_HOST")
 DB_PORT = os.getenv("DB_PORT")

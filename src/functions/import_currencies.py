@@ -9,24 +9,24 @@ from src.utils import (
     insert_query,
     select_query,
 )
-from src.responses import SuccessResponse, ConflictResponse, BadRequestResponse
 
 
-def import_currencies(event, context):
+def import_currencies_handler(event, context):
     try:
         date_req = get_date_str(event)
     except ValueError:
-        return BadRequestResponse(detail="Bad date param")
+        return {"statusCode": 400, "body": {"detail": "Bad date param"}}
 
     records = execute_query(select_query(DB_TABLE, date_req), context)
 
     if records:
-        return ConflictResponse(
-            detail="Conflict. Currencies for this date alteady exists."
-        )
+        return {
+            "statusCode": 409,
+            "body": {"detail": "Conflict. Currencies for this date alteady exists."},
+        }
     response = requests.get(CBR_URL, params={"date_req": date_req})
     if not response:
-        return BadRequestResponse(detail="Bad request to CBR")
+        return {"statusCode": 503, "detail": "Bad request to CBR"}
 
     df = pd.read_xml(response.content, encoding="ascii")
     df = df[df["CharCode"].isin(CURRENCIES)]
@@ -38,4 +38,4 @@ def import_currencies(event, context):
 
     execute_query(insert_query(DB_TABLE, insert_values), context, commit=True)
 
-    return SuccessResponse()
+    return {"statusCode": 200, "body": {"detail": "success"}}
