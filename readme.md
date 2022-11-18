@@ -117,7 +117,7 @@ To call enpoints use **docs/ETL Yandex Cloud.postman_collection.json**
 
 ## Usage
 
-> **Test access token:** t1.9euelZrPnoqUi5LMmJ6TlZOKysuRje3rnpWayMeZnpfGy4uPjJielM-Lj5fl8_d1HSNk-e9JIUFW_t3z9zVMIGT570khQVb-.NJfKVdIKiJc2QeYO9VRcGx3vLotBRBvhJlF9jL6G8VhXUE9LvdM2Rgd1b1Wgqu4EqBIGeOPjXCoHX7CMkjNKBg
+> **Test access token:** Bearer t1.9euelZrPnoqUi5LMmJ6TlZOKysuRje3rnpWayMeZnpfGy4uPjJielM-Lj5fl8_d1HSNk-e9JIUFW_t3z9zVMIGT570khQVb-.NJfKVdIKiJc2QeYO9VRcGx3vLotBRBvhJlF9jL6G8VhXUE9LvdM2Rgd1b1Wgqu4EqBIGeOPjXCoHX7CMkjNKBg
 
 First of all you need to create table in the database calling Initialize database Function with Authorization Bearer token in headers by **Link to invoke**.
 link: https://functions.yandexcloud.net/d4emlugpg6htt82d0l6l
