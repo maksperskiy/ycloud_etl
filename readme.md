@@ -119,8 +119,13 @@ To call enpoints use **docs/ETL Yandex Cloud.postman_collection.json**
 
 
 First of all you need to create table in the database calling Initialize database Function with Authorization Bearer token in headers by **Link to invoke**.
+link: https://functions.yandexcloud.net/d4emlugpg6htt82d0l6l
+
 After that you can collect currency rates from CBR API to your database calling Import currencies Function with Authorization token and also with date_req (required date) query string param in the "dd/mm/YYYY" (For, example: 11/11/2022) format (By default setted current date).
+https://functions.yandexcloud.net/d4eqd79kg2cok8dv1nrh?date_req=22/10/2022
+
 To get all currency rates for a needed date you should call the Get currencies Function with token and also with date_req query string param.
+https://functions.yandexcloud.net/d4errilvkv96686o7lp0?date_req=22/10/2022
 
 Example of Get currencies Function's response:
 
