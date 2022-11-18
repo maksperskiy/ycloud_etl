@@ -79,9 +79,9 @@ This token is needed to call enpoints. Token expires in a year.
 <img src="docs/images/create_func.png" alt="env files screenshot" />
 
 In the Editor select "Object storage" **Method**, specify **Bucket** and zip file name as **Object**. As **Entrypoint** set:
- - main.invoke_initialize_database for Initialize database Function
- - main.invoke_import_currencies for Import currencies Function
- - main.invoke_get_currencies for Get currencies Function
+ - main.initialize_database_handler for Initialize database Function
+ - main.import_currencies_handler for Import currencies Function
+ - main.get_currencies_handler for Get currencies Function
 
 For Initialize database Function create **Trigger** and set Timer setting "Cron expession" as **"0 9 ? * * *"**.
 
