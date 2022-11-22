@@ -10,14 +10,7 @@
 			"name": "get currency",
 			"request": {
 				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "t1.9euelZrPnoqUi5LMmJ6TlZOKysuRje3rnpWayMeZnpfGy4uPjJielM-Lj5fl8_d1HSNk-e9JIUFW_t3z9zVMIGT570khQVb-.NJfKVdIKiJc2QeYO9VRcGx3vLotBRBvhJlF9jL6G8VhXUE9LvdM2Rgd1b1Wgqu4EqBIGeOPjXCoHX7CMkjNKBg",
-							"type": "string"
-						}
-					]
+					"type": "noauth"
 				},
 				"method": "GET",
 				"header": [
@@ -25,23 +18,31 @@
 						"key": "Content-Type",
 						"value": "application/json",
 						"type": "text"
+					},
+					{
+						"key": "x-auth",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.Kye0_JmjrXRxuPumxWPfYmAUTOLwXQrJXjnQnh-S8VA",
+						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "https://functions.yandexcloud.net/d4errilvkv96686o7lp0?date_req=22/10/2022",
+					"raw": "https://bba0fqtnqub81soff7qf.containers.yandexcloud.net/api/v1/currency?date_req=2022-11-15",
 					"protocol": "https",
 					"host": [
-						"functions",
+						"bba0fqtnqub81soff7qf",
+						"containers",
 						"yandexcloud",
 						"net"
 					],
 					"path": [
-						"d4errilvkv96686o7lp0"
+						"api",
+						"v1",
+						"currency"
 					],
 					"query": [
 						{
 							"key": "date_req",
-							"value": "22/10/2022"
+							"value": "2022-11-15"
 						}
 					]
 				}
@@ -52,63 +53,36 @@
 			"name": "import currency",
 			"request": {
 				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "t1.9euelZrPnoqUi5LMmJ6TlZOKysuRje3rnpWayMeZnpfGy4uPjJielM-Lj5fl8_d1HSNk-e9JIUFW_t3z9zVMIGT570khQVb-.NJfKVdIKiJc2QeYO9VRcGx3vLotBRBvhJlF9jL6G8VhXUE9LvdM2Rgd1b1Wgqu4EqBIGeOPjXCoHX7CMkjNKBg",
-							"type": "string"
-						}
-					]
+					"type": "noauth"
 				},
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "x-auth",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.Kye0_JmjrXRxuPumxWPfYmAUTOLwXQrJXjnQnh-S8VA",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "https://functions.yandexcloud.net/d4eqd79kg2cok8dv1nrh?date_req=22/10/2022",
+					"raw": "https://bba0fqtnqub81soff7qf.containers.yandexcloud.net/api/v1/currency/import?date_req=2022-11-15",
 					"protocol": "https",
 					"host": [
-						"functions",
+						"bba0fqtnqub81soff7qf",
+						"containers",
 						"yandexcloud",
 						"net"
 					],
 					"path": [
-						"d4eqd79kg2cok8dv1nrh"
+						"api",
+						"v1",
+						"currency",
+						"import"
 					],
 					"query": [
 						{
 							"key": "date_req",
-							"value": "22/10/2022"
+							"value": "2022-11-15"
 						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "initialize database",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "t1.9euelZrPnoqUi5LMmJ6TlZOKysuRje3rnpWayMeZnpfGy4uPjJielM-Lj5fl8_d1HSNk-e9JIUFW_t3z9zVMIGT570khQVb-.NJfKVdIKiJc2QeYO9VRcGx3vLotBRBvhJlF9jL6G8VhXUE9LvdM2Rgd1b1Wgqu4EqBIGeOPjXCoHX7CMkjNKBg",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://functions.yandexcloud.net/d4emlugpg6htt82d0l6l",
-					"protocol": "https",
-					"host": [
-						"functions",
-						"yandexcloud",
-						"net"
-					],
-					"path": [
-						"d4emlugpg6htt82d0l6l"
 					]
 				}
 			},

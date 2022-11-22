@@ -21,10 +21,12 @@ Project provides endpoints to collect currency rates from CBR API to the Postgre
 
 ### About the Solution
 
-There are three Cloud Functions were creted to solve this task:
-- Initialize database - creates table in given Postgre database. 
-- Import currencies - sends request to CBR API with given date to get currency rates and insert them in created table. This function is called periodically by Timer trigger.
-- Get currencies - returns currencies for given date. 
+There is one Cloud Function was creted to solve this task:
+ - Import currencies - sends request to CBR API with given date to get currency rates and insert them in created table. This function is called periodically by Timer trigger.
+Also, API was written with FastAPI Python framework and provides two functional endpoints:
+ - Get currencies - Returns currency rates for given date. (Today by default)
+ - Import currencies - Calls Yandex Cloud Function to import currencies into database for gived date. (Today by default)
+
 
 
 ### Tech Stack
@@ -33,7 +35,7 @@ There are three Cloud Functions were creted to solve this task:
   <summary>Yandex Cloud</summary>
   <ul>
     <li><a href="https://cloud.yandex.ru/services/functions/">Cloud Functions</a></li>
-    <li><a href="https://cloud.yandex.ru/services/storage/">Object storage</a></li>
+    <li><a href="https://fastapi.tiangolo.com/">FastAPI</a></li>
     <li><a href="https://cloud.yandex.ru/services/managed-postgresql/">Managed Service for PostgreSQL</a></li>
     <li><a href="https://cloud.yandex.ru/docs/functions/operations/trigger/timer-create/">Timer trigger</a></li>
   </ul>
@@ -50,42 +52,27 @@ There are three Cloud Functions were creted to solve this task:
 
 ### Prerequisites
 
-1. Create Bucket in Yandex Cloud **Object Storage** with default settings.
-
-<img src="docs/images/create_bucket.png" alt="env files screenshot" />
-
-2. To upload source code in the **Cloud Function** you need to make zip file with source code starting **bash** script: 
+1. Upload source code in the **Cloud Function** you need to make zip file with source code starting **bash** script: 
 
 ```bash
  make zip
 ```
 
- And upload zip file to the created **Bucket**.
-
-3. To get Bearer Authorization token you need to install Yandex Cloud CLI ([Instruction](https://cloud.yandex.ru/docs/cli/quickstart#install)), create profile and create token:
-
-```bash
-yc iam create-token
-```
-
-This token is needed to call enpoints. Token expires in a year. 
-
-4. Create Service account that will invoke functions.
+2. Create Service account that will invoke this function.
 
 ### Installation
 
-1. Create 3 Cloud Functions 
+1. Create Cloud Functions 
 
 <img src="docs/images/create_func.png" alt="env files screenshot" />
 
-In the Editor select "Object storage" **Method**, specify **Bucket** and zip file name as **Object**. As **Entrypoint** set:
- - main.initialize_database_handler for Initialize database Function
- - main.import_currencies_handler for Import currencies Function
- - main.get_currencies_handler for Get currencies Function
+In the Editor select "zip-file" **Method**, and upload zip file
 
-For Initialize database Function create **Trigger** and set Timer setting "Cron expession" as **"0 9 ? * * *"**.
+As **Entrypoint** set:
+ - src.functions.import_currencies.import_currencies_handler for Import currencies Function
 
-2. Set Environment Variables
+
+Set Environment Variables
 
 `DB_HOST` - host to database
 
@@ -97,18 +84,47 @@ For Initialize database Function create **Trigger** and set Timer setting "Cron 
 
 `DB_NAME` - name of the database
 
-`DB_TABLE` - name of table to create in database
-
 These Environment Variables you should to add in "Environment Variables" in the Cloud Function Editor.
 
 <img src="docs/images/envs.png" alt="env files screenshot" />
 
-3. Select Service account.
+For Initialize database Function create **Trigger** and set Timer setting "Cron expession" as **"0 9 ? * * *"**.
 
-4. Create version.
+Select Service account.
 
-> There is **Link to invoke** for each Cloud Function. It's a endpoint to call. But it doesn't work without Bearer Token provided Yandex Cloud CLI.
+Create version.
 
+> There is **Link to invoke** in Cloud Function Overview. It's a endpoint to call. To call this endpoint outside make this function be **public**. 
+
+2. Pushing to Yandex Cloud Conteiner Registry
+
+Create registry in "Container Registry" in Yandex Cloud.
+
+Login into Docker Registry:
+
+```bash
+make login
+```
+
+Build image:
+
+```bash
+make image
+```
+
+Tag image:
+
+```bash
+docker tag tes-etl cr.yandex/{REGISTRY_ID}/tes-etl:latest
+```
+
+Push image:
+
+```bash
+docker push cr.yandex/{REGISTRY_ID}/tes-etl
+```
+
+Create container in "Serverless Containers" selecting image and service account.
 
 ### Postman collection
 
@@ -117,40 +133,41 @@ To call enpoints use **docs/ETL Yandex Cloud.postman_collection.json**
 
 ## Usage
 
-> **Test access token:** Bearer t1.9euelZrPnoqUi5LMmJ6TlZOKysuRje3rnpWayMeZnpfGy4uPjJielM-Lj5fl8_d1HSNk-e9JIUFW_t3z9zVMIGT570khQVb-.NJfKVdIKiJc2QeYO9VRcGx3vLotBRBvhJlF9jL6G8VhXUE9LvdM2Rgd1b1Wgqu4EqBIGeOPjXCoHX7CMkjNKBg
+> **Test access token:** eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.Kye0_JmjrXRxuPumxWPfYmAUTOLwXQrJXjnQnh-S8VA
 
-First of all you need to create table in the database calling Initialize database Function with Authorization Bearer token in headers by **Link to invoke**.
-link: https://functions.yandexcloud.net/d4emlugpg6htt82d0l6l
+SWAGGER ENPOINT: https://d5d3mdq1cofd75iahcah.apigw.yandexcloud.net/docs
 
-After that you can collect currency rates from CBR API to your database calling Import currencies Function with Authorization token and also with date_req (required date) query string param in the "dd/mm/YYYY" (For, example: 11/11/2022) format (By default setted current date).
-https://functions.yandexcloud.net/d4eqd79kg2cok8dv1nrh?date_req=22/10/2022
+<span style="color:red">Authorization token should be provided in **x-auth** header for endpoints.</span> 
+
+Now you can collect currency rates from CBR API to your database calling Import currencies Function from API with Authorization token and also with date_req (required date) query string param in the date format (For, example: 2022-10-11) format (By default setted current date).
+https://bba0fqtnqub81soff7qf.containers.yandexcloud.net/api/v1/currency/import?date_req=2022-11-15?date_req=22/10/2022
 
 To get all currency rates for a needed date you should call the Get currencies Function with token and also with date_req query string param.
-https://functions.yandexcloud.net/d4errilvkv96686o7lp0?date_req=22/10/2022
+https://bba0fqtnqub81soff7qf.containers.yandexcloud.net/api/v1/currency?date_req=2022-11-15?date_req=22/10/2022
 
 Example of Get currencies Function's response:
 
 ```json
 {
-    "data": [
-        {
-            "charCode": "USD",
-            "dateReq": "2022-10-22",
-            "id": "R01235",
-            "name": "Доллар США",
-            "nominal": 1,
-            "numCode": 840,
-            "value": "61.1958"
-        },
-        {
-            "charCode": "EUR",
-            "dateReq": "2022-10-22",
-            "id": "R01239",
-            "name": "Евро",
-            "nominal": 1,
-            "numCode": 978,
-            "value": "59.8378"
-        }
-    ]
+  "data": [
+    {
+      "code": "R01235",
+      "numCode": 840,
+      "charCode": "USD",
+      "nominal": 1,
+      "name": "Доллар США",
+      "value": 60.3982,
+      "dateReq": "2022-11-15"
+    },
+    {
+      "code": "R01239",
+      "numCode": 978,
+      "charCode": "EUR",
+      "nominal": 1,
+      "name": "Евро",
+      "value": 62.1554,
+      "dateReq": "2022-11-15"
+    }
+  ]
 }
 ```

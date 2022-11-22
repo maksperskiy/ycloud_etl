@@ -11,3 +11,7 @@ def get_date_str(event):
     if not date_req:
         date_req = date.today().strftime("%d/%m/%Y")
     return date_req
+
+def to_camel_case(snake_case_string: str) -> str:
+    string = snake_case_string.replace("_", " ").title().replace(" ", "")
+    return string[0].lower() + string[1:]
