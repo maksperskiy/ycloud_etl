@@ -140,10 +140,10 @@ SWAGGER ENPOINT: https://d5d3mdq1cofd75iahcah.apigw.yandexcloud.net/docs
 <span style="color:red">Authorization token should be provided in **x-auth** header for endpoints.</span> 
 
 Now you can collect currency rates from CBR API to your database calling Import currencies Function from API with Authorization token and also with date_req (required date) query string param in the date format (For, example: 2022-10-11) format (By default setted current date).
-https://bba0fqtnqub81soff7qf.containers.yandexcloud.net/api/v1/currency/import?date_req=2022-11-15?date_req=22/10/2022
+https://bba0fqtnqub81soff7qf.containers.yandexcloud.net/api/v1/currency/import?date_req=2022-11-15
 
 To get all currency rates for a needed date you should call the Get currencies Function with token and also with date_req query string param.
-https://bba0fqtnqub81soff7qf.containers.yandexcloud.net/api/v1/currency?date_req=2022-11-15?date_req=22/10/2022
+https://bba0fqtnqub81soff7qf.containers.yandexcloud.net/api/v1/currency?date_req=2022-11-15
 
 Example of Get currencies Function's response:
 
