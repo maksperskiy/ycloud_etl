@@ -137,6 +137,8 @@ To call enpoints use **docs/ETL Yandex Cloud.postman_collection.json**
 
 SWAGGER ENPOINT: https://d5d3mdq1cofd75iahcah.apigw.yandexcloud.net/docs
 
+<span style="color:red">Unfortunately you can't call endpoint from OpenAPI Swagger. Use Postman, please</span> 
+
 <span style="color:red">Authorization token should be provided in **x-auth** header for endpoints.</span> 
 
 Now you can collect currency rates from CBR API to your database calling Import currencies Function from API with Authorization token and also with date_req (required date) query string param in the date format (For, example: 2022-10-11) format (By default setted current date).
