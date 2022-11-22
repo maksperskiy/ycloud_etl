@@ -145,6 +145,7 @@ https://bba0fqtnqub81soff7qf.containers.yandexcloud.net/api/v1/currency/import?d
 To get all currency rates for a needed date you should call the Get currencies Function with token and also with date_req query string param.
 https://bba0fqtnqub81soff7qf.containers.yandexcloud.net/api/v1/currency?date_req=2022-11-15
 
+
 Example of Get currencies Function's response:
 
 ```json
